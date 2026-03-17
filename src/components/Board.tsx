@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import Column from "./Column";
 import { DndContext } from "@dnd-kit/core";
 import useStore from "../store/useStore";
+import successToaster from "../utils/toaster";
 
 function Board() {
   const { tasks, updateTaskList } = useStore();
@@ -21,6 +22,7 @@ function Board() {
 
       return updatedTasks;
     });
+    successToaster("Task moved successfully!");
   };
   useEffect(() => {
     setAllTasks(tasks);

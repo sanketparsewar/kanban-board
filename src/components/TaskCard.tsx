@@ -3,6 +3,7 @@ import useStore from "../store/useStore";
 import { useEffect, useRef, useState } from "react";
 import { Check, GripHorizontal, Trash2 } from "lucide-react";
 import type { Task } from "../types/type";
+import successToaster from "../utils/toaster";
 
 type TaskCardProps = {
   task: Task;
@@ -32,6 +33,10 @@ function TaskCard({ task }: TaskCardProps) {
   const handleUpdateTask = () => {
     updateTask({ ...task, title, description });
     setIsEditing(false);
+  };
+  const handleDeleteTask = () => {
+    deleteTask(task.id);
+    successToaster("Task deleted successfully!");
   };
 
   useEffect(() => {
@@ -67,7 +72,7 @@ function TaskCard({ task }: TaskCardProps) {
         ) : (
           <button
             className="cursor-pointer text-red-500 hover:text-red-400 transition"
-            onClick={() => deleteTask(task.id)}
+            onClick={() => handleDeleteTask()}
           >
             <Trash2 size={18} />
           </button>
